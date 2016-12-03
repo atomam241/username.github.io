@@ -1,0 +1,174 @@
+@import url(http://db.onlinewebfonts.com/c/a6a6c7df56ec4b0c427c3d6777d6f47e?family=Terminator+Real+NFI);
+@font-face {font-family: "Terminator Real NFI";
+    src: url("http://db.onlinewebfonts.com/t/a6a6c7df56ec4b0c427c3d6777d6f47e.eot");
+    src: url("http://db.onlinewebfonts.com/t/a6a6c7df56ec4b0c427c3d6777d6f47e.eot?#iefix") format("embedded-opentype"),
+    url("http://db.onlinewebfonts.com/t/a6a6c7df56ec4b0c427c3d6777d6f47e.woff") format("woff"),
+    url("http://db.onlinewebfonts.com/t/a6a6c7df56ec4b0c427c3d6777d6f47e.ttf") format("truetype"),
+    url("http://db.onlinewebfonts.com/t/a6a6c7df56ec4b0c427c3d6777d6f47e.svg#Terminator Real NFI") format("svg");
+}
+body {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/ce/Takarazuka_Grand_Theater05s4s3104.jpg");
+  background-size: 100%;
+  background-repeat: repeat;
+}
+input {
+    display:none;
+}
+label {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+.tabs {
+  color: #FFF;
+  border-spacing: 5px;
+  margin: 0px auto;
+}
+.tabs tr td {
+  border: 1px solid white;
+  border-bottom: none;
+  background: rgb(2, 2, 2);
+  background: rgba(2, 2, 2, 0.5);
+  border-top-right-radius: .7em;
+  border-top-left-radius: .7em;
+  width: 200px;
+  text-align: center;
+  height: 50px;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.tabs tr td:hover {
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.8);
+}
+.tabDiv {
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  opacity: 0.0;
+  color: #FFF;
+  z-index: -1;
+  position: absolute;
+  left: 50%;	
+  margin-left: -650px;
+}
+#tab1:checked ~ table tr td#td1 {
+  background-color: #000;
+  margin-top: 50px;
+}
+#tab1:checked ~ #t1 {
+  opacity: 1.0;
+  z-index: 1;
+}
+#tab2:checked ~ table tr td#td2 {
+  background-color: #000;
+}
+#tab2:checked ~ #t2 {
+  opacity: 1.0;
+  z-index: 1;
+}
+#tab3:checked ~ table tr td#td3 {
+  background-color: #000;
+}
+#tab3:checked ~ #t3 {
+  opacity: 1.0;
+  z-index: 1;
+}
+#tab4:checked ~ table tr td#td4 {
+  background-color: #000;
+}
+#tab4:checked ~ #t4 {
+  opacity: 1.0;
+  z-index: 1;
+}
+#tab5:checked ~ table tr td#td5 {
+  background-color: #000;
+}
+#tab5:checked ~ #t5 {
+  opacity: 1.0;
+  z-index: 1;
+}
+.cont {
+  margin-top: -5px;
+  background-color: #000;
+  width: 1300px;
+  border-radius: .8em;
+}
+.poster {
+  border: 1px solid white;
+}
+.movie {
+  margin-top: 50px;
+  margin: 0px auto;
+}
+.title {
+  text-align: center;
+  width: 100%
+}
+#SW {
+  color: #FFFF00;
+  font-family: STARWARS;
+	font-size: 80px;
+	font-style: normal;
+	font-variant: normal;
+}
+#MX {
+  color: #58FF58;
+  font-family: VT323;
+	font-size: 100px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+}
+#TG {
+  font-family: 'Terminator Real NFI';
+	font-size: 40px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+}
+
+.PH {
+  width: 400px;
+}
+
+.fixed {  
+    color: #FFF;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+#intro {
+  font-family: VT323;
+  font-size: 100px;
+}
+
+.m {
+  color: #4885ed;
+}
+
+.o {
+  color: #db3236;
+}
+
+.f {
+  color: #f4c20d;
+}
+
+.i {
+  color: #4885ed;
+}
+
+.e {
+  color: #3cba54;
+}
+
+.s {
+  color: #db3236;
+}
