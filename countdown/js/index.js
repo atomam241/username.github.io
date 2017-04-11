@@ -30,7 +30,7 @@ function pad(str, max) {
 
 window.setInterval(function() {
   update();
-}, 60);
+}, 1);
 
 function update() {
   document.getElementById("title").innerHTML = Date.daysBetween(new Date(), end);
