@@ -35,5 +35,4 @@ window.setInterval(function() {
 function update() {
   document.getElementById("title").innerHTML = Date.daysBetween(new Date(), end);
   //console.log(last);
-  last++;
 }
