@@ -21,7 +21,7 @@ Date.daysBetween = function(date1, date2) {
   var days = Math.floor(difference_ms / 24);
 
   //return "<span>" + days + " Days</span><br><span>" + hours + " Hours</span><br><span>" + minutes + " Minutes</span><br><span>" + seconds + " Seconds</span><br><span>To Graduation</span>";
-  return "<span>" + pad(days, 2) + ":" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + ":" + pad(ms, 4) + "</span><br><span>TO GRADUATION</span>";
+  return "<span>" + pad(days, 2) + ":" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + ":" + pad(ms, 3) + "</span><br><span>TO GRADUATION</span>";
 }
 
 function pad(str, max) {
