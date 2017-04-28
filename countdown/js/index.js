@@ -20,7 +20,7 @@ Date.daysBetween = function(date1, date2) {
   var hours = Math.floor(difference_ms % 24);
   var days = Math.floor(difference_ms / 24);
 
-  return [pad(days, 2), pad(hours, 2), pad(minutes, 2), pad(seconds, 2), pad(ms, 4)]
+  return [pad(days, 2), pad(hours, 2), pad(minutes, 2), pad(seconds, 2), pad(ms, 3)]
     //return "<span>" + pad(days, 2) + ":" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + ":" + pad(ms, 4) + "</span><br><span>TO GRADUATION</span>";
 }
 
