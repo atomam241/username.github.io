@@ -1,6 +1,6 @@
 var last = 1;
 //end date
-var end = new Date(2017, 5, 2, 17, 30);
+var end = new Date(2017, 5, 2, 17, 30)
 Date.daysBetween = function(date1, date2) {
   //Get 1 day in milliseconds
   var one_day = 1000 * 60 * 60 * 24;
