@@ -1,6 +1,5 @@
 var last = 1;
-//end date
-var end = new Date(2018, 5, 1, 17, 30)
+var end = new Date(2018, 5, 1, 17, 30);
 Date.daysBetween = function(date1, date2) {
   //Get 1 day in milliseconds
   var one_day = 1000 * 60 * 60 * 24;
@@ -21,9 +20,15 @@ Date.daysBetween = function(date1, date2) {
   var hours = Math.floor(difference_ms % 24);
   var days = Math.floor(difference_ms / 24);
 
-  return [pad(days, 2), pad(hours, 2), pad(minutes, 2), pad(seconds, 2), pad(ms, 3)]
-    //return "<span>" + pad(days, 2) + ":" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + ":" + pad(ms, 4) + "</span><br><span>TO GRADUATION</span>";
-}
+  return [
+    pad(days, 2),
+    pad(hours, 2),
+    pad(minutes, 2),
+    pad(seconds, 2),
+    pad(ms, 3)
+  ];
+  //return "<span>" + pad(days, 2) + ":" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + ":" + pad(ms, 4) + "</span><br><span>TO GRADUATION</span>";
+};
 
 function pad(str, max) {
   return str.toString().length < max ? pad("0" + str, max) : str;
@@ -34,11 +39,23 @@ window.setInterval(function() {
 }, 1);
 
 function update() {
-  var days = 99 - (Math.abs(Date.daysBetween(new Date(), end)[0]));
-  if(days >= 255 || days < 0){
-    days = 254;
+  var show = Date.daysBetween(new Date(), end);
+  if(show[0] < 0){
+    show = show.map(x => x * -1);
+    show[0] = -1 * show[0]
   }
-  document.getElementById("title").innerHTML = "<span>" + Date.daysBetween(new Date(), end)[0] + ":" + Date.daysBetween(new Date(), end)[1] + ":" + Date.daysBetween(new Date(), end)[2] + ":" + Date.daysBetween(new Date(), end)[3] + ":" + Date.daysBetween(new Date(), end)[4] + "</span><br><span>TO GRADUATION</span>";
-  document.documentElement.style.background = "radial-gradient(circle at bottom, #" + days.toString(16) + "" + 20 + "00 " + 10 + "%, #000020 " + 100 + "%, #000000 100%)"
-    //console.log(last);
+  show = show.map(x => pad(x, 2));
+  document.getElementById("content").innerHTML =
+    "<h1>" +
+    show[0] +
+    ":" +
+    show[1] +
+    ":" +
+    show[2] +
+    ":" +
+    show[3] +
+    ":" +
+    pad(show[4], 4) +
+    "</h1><h3>TO GRADUATION</h3>";
+  //console.log(last);
 }
