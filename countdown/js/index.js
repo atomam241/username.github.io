@@ -27,6 +27,7 @@ Date.daysBetween = function(date1, date2) {
     pad(seconds, 2),
     pad(ms, 3)
   ];
+  //just a test
   //return "<span>" + pad(days, 2) + ":" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + ":" + pad(ms, 4) + "</span><br><span>TO GRADUATION</span>";
 };
 
@@ -40,9 +41,9 @@ window.setInterval(function() {
 
 function update() {
   var show = Date.daysBetween(new Date(), end);
-  if(show[0] < 0){
+  if (show[0] < 0) {
     show = show.map(x => x * -1);
-    show[0] = -1 * show[0]
+    show[0] = -1 * show[0];
   }
   show = show.map(x => pad(x, 2));
   document.getElementById("content").innerHTML =
@@ -57,5 +58,4 @@ function update() {
     ":" +
     pad(show[4], 4) +
     "</h1><h3>TO GRADUATION</h3>";
-  //console.log(last);
 }

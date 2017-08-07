@@ -4,46 +4,45 @@ html {
 body {
   margin: 0;
 }
-.left {
+.main {
   transform-origin: top left;
-  animation: light 2s ease-in-out infinite alternate;
+  animation: rotate 3s ease-in-out infinite alternate;
   background-image: linear-gradient(30deg, #FFDB19 50%, #1919FF 50%);
   top: -100%;
   bottom: -100%;
   left: -100%;
   right: -100%;
   position: fixed;
-  opacity: .2;
-  z-index: -1;
-}
-.right {
-  transform-origin: top right;
-  animation: light 3s ease-in-out infinite alternate;
-  background-image: linear-gradient(-30deg, #FFDB19 50%, #1919FF 50%);
-  top: -100%;
-  bottom: -100%;
-  left: -100%;
-  right: -100%;
-  position: fixed;
-  opacity: .2;
+  opacity: .3;
   z-index: -1;
 }
 .mod1l {
   animation-direction: alternate-reverse;
-  animation-duration: 4s;
+  animation-duration: 5s;
+  background-image: linear-gradient(35deg, #FFDB19 50%, #1919FF 50%);
 }
 .mod2l {
-  animation-duration: 6s;
+  animation-duration: 7s;
+  background-image: linear-gradient(25deg, #FFDB19 50%, #1919FF 50%);
+}
+.modr {
+  transform-origin: top right;
+  animation-duration: 4s;
+  background-image: linear-gradient(-35deg, #FFDB19 50%, #1919FF 50%);
 }
 .mod1r {
+  transform-origin: top right;
   animation-direction: alternate-reverse;
-  animation-duration: 5s;
+  animation-duration: 6s;
+  background-image: linear-gradient(-25deg, #FFDB19 50%, #1919FF 50%);
 }
 .mod2r {
-  animation-duration: 7s;
+  transform-origin: top right;
+  animation-duration: 8s;
+  background-image: linear-gradient(-30deg, #FFDB19 50%, #1919FF 50%);
 }
 
-@keyframes light {
+@keyframes rotate {
   0% {
     transform: rotate(-10deg);
   }
