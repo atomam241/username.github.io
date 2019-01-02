@@ -28,31 +28,6 @@ function getCoords(event) {
   ];
 }
 
-if (window.DeviceOrientationEvent) {
-  window.addEventListener("deviceorientation", function() {
-    mousecoords = [event.beta, event.gamma];
-    adjustmentPoint = [
-      (mousecoords[0] - canvas.width / 2) / 100,
-      (mousecoords[1] - canvas.height / 2) / 100
-    ];
-  }, true);
-} else if (window.DeviceMotionEvent) {
-  window.addEventListener('devicemotion', function() {
-    mousecoords = [event.acceleration.x * 2, event.acceleration.y * 2];
-    adjustmentPoint = [
-      (mousecoords[0] - canvas.width / 2) / 100,
-      (mousecoords[1] - canvas.height / 2) / 100
-    ];
-  }, true);
-} else {
-  window.addEventListener("MozOrientation", function() {
-    mousecoords = [orientation.x * 50, orientation.y * 50];
-    adjustmentPoint = [
-      (mousecoords[0] - canvas.width / 2) / 100,
-      (mousecoords[1] - canvas.height / 2) / 100
-    ];
-  }, true);
-}
 
 requestAnimationFrame(drawStars);
 
