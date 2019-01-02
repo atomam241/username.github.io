@@ -33,6 +33,10 @@ function getCoords(event) {
 if (window.DeviceOrientationEvent) {
     window.addEventListener("deviceorientation", function () {
         mousecoords = [event.beta, event.gamma];
+        adjustmentPoint = [
+          (mousecoords[0] - canvas.width / 2) / 100,
+          (mousecoords[1] - canvas.height / 2) / 100
+        ];
     }, true);
 }
 
