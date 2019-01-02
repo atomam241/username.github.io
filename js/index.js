@@ -8,6 +8,15 @@ var adjustmentPoint = [0, 2];
 var overshoot = 500;
 var mousecoords = [];
 
+$(window).bind('resize', function(e)
+{
+  if (window.RT) clearTimeout(window.RT);
+  window.RT = setTimeout(function()
+  {
+    this.location.reload(false); /* false to get page from cache */
+  }, 100);
+});
+
 var DENSITY = 5; // "per square inch" or something maybe
 makeStars(DENSITY);
 
@@ -21,6 +30,11 @@ function getCoords(event) {
   ];
 }
 
+if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", function () {
+        mousecoords = [event.beta, event.gamma];
+    }, true);
+}
 
 requestAnimationFrame(drawStars);
 
@@ -53,7 +67,7 @@ function drawStars() {
   for (var i in stars) {
     context.fillStyle = stars[i][3];
     context.fillRect(stars[i][0], stars[i][1], stars[i][2], stars[i][2]);
-    context.fill();
+    //context.fill();
   }
   updateStars();
   requestAnimationFrame(drawStars);
