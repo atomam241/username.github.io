@@ -8,11 +8,9 @@ var adjustmentPoint = [0, 2];
 var overshoot = 500;
 var mousecoords = [];
 
-$(window).bind('resize', function(e)
-{
+$(window).bind('resize', function(e) {
   if (window.RT) clearTimeout(window.RT);
-  window.RT = setTimeout(function()
-  {
+  window.RT = setTimeout(function() {
     this.location.reload(false); /* false to get page from cache */
   }, 100);
 });
@@ -31,13 +29,29 @@ function getCoords(event) {
 }
 
 if (window.DeviceOrientationEvent) {
-    window.addEventListener("deviceorientation", function () {
-        mousecoords = [event.beta, event.gamma];
-        adjustmentPoint = [
-          (mousecoords[0] - canvas.width / 2) / 100,
-          (mousecoords[1] - canvas.height / 2) / 100
-        ];
-    }, true);
+  window.addEventListener("deviceorientation", function() {
+    mousecoords = [event.beta, event.gamma];
+    adjustmentPoint = [
+      (mousecoords[0] - canvas.width / 2) / 100,
+      (mousecoords[1] - canvas.height / 2) / 100
+    ];
+  }, true);
+} else if (window.DeviceMotionEvent) {
+  window.addEventListener('devicemotion', function() {
+    mousecoords = [event.acceleration.x * 2, event.acceleration.y * 2];
+    adjustmentPoint = [
+      (mousecoords[0] - canvas.width / 2) / 100,
+      (mousecoords[1] - canvas.height / 2) / 100
+    ];
+  }, true);
+} else {
+  window.addEventListener("MozOrientation", function() {
+    mousecoords = [orientation.x * 50, orientation.y * 50];
+    adjustmentPoint = [
+      (mousecoords[0] - canvas.width / 2) / 100,
+      (mousecoords[1] - canvas.height / 2) / 100
+    ];
+  }, true);
 }
 
 requestAnimationFrame(drawStars);
@@ -50,8 +64,8 @@ function makeStars(DENSITY) {
   var randomX, randomY, randomZ;
   var sortable = [];
   for (var i = 0; i < totalStars; i++) {
-    randomX = Math.random() * (canvas.width - 1 + overshoot) + 1 - overshoot/2;
-    randomY = Math.random() * (canvas.height - 1 + overshoot) + 1 - overshoot/2;
+    randomX = Math.random() * (canvas.width - 1 + overshoot) + 1 - overshoot / 2;
+    randomY = Math.random() * (canvas.height - 1 + overshoot) + 1 - overshoot / 2;
     randomZ = Math.random() * 10;
     color = randColor();
     stars[i] = [randomX, randomY, randomZ, color, randomX, randomY];
@@ -86,16 +100,16 @@ function updateStars() {
     stars[i][0] += adjustmentPoint[0] * stars[i][2] / 10;
     stars[i][1] += adjustmentPoint[1] * stars[i][2] / 10;
 
-    if (stars[i][0] >= canvas.width + overshoot/2) {
+    if (stars[i][0] >= canvas.width + overshoot / 2) {
       stars[i][0] = -10;
     }
-    if (stars[i][1] >= canvas.height + overshoot/2) {
+    if (stars[i][1] >= canvas.height + overshoot / 2) {
       stars[i][1] = -10;
     }
-    if (stars[i][0] < -overshoot/2) {
+    if (stars[i][0] < -overshoot / 2) {
       stars[i][0] = canvas.width;
     }
-    if (stars[i][1] < -overshoot/2) {
+    if (stars[i][1] < -overshoot / 2) {
       stars[i][1] = canvas.height;
     }
 
