@@ -1,0 +1,51 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+}
+body {
+  background-color: #eee;
+  position: relative;
+}
+#starfield {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background-color: #000;
+}
+
+
+h1 {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  font-family: 'Staatliches', cursive;
+  font-size: 35pt;
+  letter-spacing: 3px;
+  margin-top: 10%;
+}
+
+h2 {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  margin-top: 2%;
+}
+
+h3 {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+}
+
+a {
+  padding-left: 5px;
+  padding-right: 5px;
+}
