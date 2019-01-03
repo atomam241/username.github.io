@@ -39,22 +39,6 @@ window.setInterval(function() {
   update();
 }, 1);
 
-function convertRange( value, r1, r2 ) {
-    return ( value - r1[0] ) * ( r2[1] - r2[0] ) / ( r1[1] - r1[0] ) + r2[0];
-}
-
-// window.setInterval(function() {
-//   test();
-// }, 100);
-// var b = 0;
-// function test(){
-//   if(b < 0){
-//     b = 380;
-//   }else{
-//     b -= 1;
-//   }
-// }
-
 function update() {
   var show = Date.daysBetween(new Date(), end);
   if (show[0] < 0) {
@@ -74,11 +58,5 @@ function update() {
     ":" +
     pad(show[4], 4) +
     "</h1><h3>TO GRADUATION</h3>";
-    var days = Math.abs(show[0]);
-    //days = b;
-    var colorScale = [0, 255];
-    var dayScale = [0, 380];
-    var bg = "radial-gradient(circle at bottom, rgba(" + Math.abs(255 - convertRange(days, dayScale, colorScale)) + "," + Math.abs(convertRange(Math.sin(.01 * Math.pow(days, 2)), [-1,1], colorScale)) + "," + convertRange(days, dayScale, colorScale) + ",1)" + " " + days + "%, #000020 " + 100 + "%, #000000 100%)";
-  document.documentElement.style.background = bg;
-  console.log(bg);
+  //document.documentElement.style.background = "radial-gradient(circle at bottom, #" + days.toString(16) + "" + 20 + "00 " + 10 + "%, #000020 " + 100 + "%, #000000 100%)"
 }
