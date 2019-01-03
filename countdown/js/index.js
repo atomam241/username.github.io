@@ -58,4 +58,5 @@ function update() {
     ":" +
     pad(show[4], 4) +
     "</h1><h3>TO GRADUATION</h3>";
+  //document.documentElement.style.background = "radial-gradient(circle at bottom, #" + days.toString(16) + "" + 20 + "00 " + 10 + "%, #000020 " + 100 + "%, #000000 100%)"
 }
