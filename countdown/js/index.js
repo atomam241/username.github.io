@@ -115,5 +115,5 @@ function update() {
     (days + 1) + "%, #000020 " + 100 + "%, #000000 100%)";
 
   document.documentElement.style.background = bg;
-  console.log(bg);
+  //console.log(bg);
 }
