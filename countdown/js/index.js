@@ -102,6 +102,7 @@ function update() {
   //so i dont have to compute the trig functions every time
   currMin = -1;
   if (currMin != min){
+    console.log("trig");
     greenVal = Math.sin((days / 1800) * min);
     blueVal = Math.cos((days / 200) * hour);
     currMin = min;
