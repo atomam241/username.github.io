@@ -99,6 +99,13 @@ function update() {
   //days = b;
   var colorScale = [0, 255];
   var dayScale = [0, 380];
+  //so i dont have to compute the trig functions every time
+  currMin = -1;
+  if (currMin != min){
+    greenVal = Math.sin((days / 1800) * min);
+    blueVal = Math.cos((days / 200) * hour);
+    currMin = min;
+  }
   //control the bachground in a very complicated manner <<-- DONT BE AFRAID TO PULL REQUEST IF YOU CAN DO SOMETHING BETTER
   var bg = "radial-gradient(circle at bottom, rgba(" +
 
@@ -106,10 +113,10 @@ function update() {
       convertRange(days, dayScale, colorScale)
     ) + "," +
 
-    convertRange(Math.sin((days / 1800) * min), [-1, 1], colorScale) + "," +
+    convertRange(greenVal, [-1, 1], colorScale) + "," +
 
     Math.abs(255 -
-      convertRange(Math.cos((days / 200) * hour), [-1, 1], colorScale)
+      convertRange(blueVal, [-1, 1], colorScale)
     ) + ",1)" + " " +
 
     (days + 1) + "%, #000020 " + 100 + "%, #000000 100%)";
