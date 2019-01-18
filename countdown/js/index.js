@@ -11,7 +11,7 @@ var difference = 0;
 Date.daysBetween = function(date1, date2) {
   //Get 1 day in milliseconds
   var one_day = 1000 * 60 * 60 * 24;
-
+  var currMin = -1;
   // Convert both dates to milliseconds
   var date1_ms = date1.getTime();
   var date2_ms = date2.getTime();
@@ -100,8 +100,7 @@ function update() {
   var colorScale = [0, 255];
   var dayScale = [0, 380];
   //so i dont have to compute the trig functions every time
-  currMin = -1;
-  if (currMin != min){
+  if (currMin != min) {
     console.log("trig");
     greenVal = Math.sin((days / 1800) * min);
     blueVal = Math.cos((days / 200) * hour);
