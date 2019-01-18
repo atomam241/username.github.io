@@ -3,7 +3,7 @@ TO CHANGE THE DATE YOU ONLY NEED TO CHANGE THIS
 LOOK UP JS DATE CONSTRUCTOR
 ----------------------------*/
 var end = new Date(2019, 4, 31, 17, 30); //  <---SIMPLE EDIT HERE BOIS
-
+currMin = -1;
 //difference in ms
 var difference = 0;
 
@@ -11,7 +11,6 @@ var difference = 0;
 Date.daysBetween = function(date1, date2) {
   //Get 1 day in milliseconds
   var one_day = 1000 * 60 * 60 * 24;
-  var currMin = -1;
   // Convert both dates to milliseconds
   var date1_ms = date1.getTime();
   var date2_ms = date2.getTime();
