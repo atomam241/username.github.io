@@ -92,7 +92,7 @@ function update() {
     pad(show[4], 4) +
     "</h1><h3>TO GRADUATION</h3>";
   var days = Math.abs(show[0]);
-  var min = difference / (1000 * 60)
+  var min = Math.floor(difference / (1000 * 60));
   var hour = min / 60
   var deg = show[3]
   //days = b;
@@ -100,7 +100,7 @@ function update() {
   var dayScale = [0, 380];
   //so i dont have to compute the trig functions every time
   if (currMin != min) {
-    console.log("trig");
+    console.log("trig " + currMin + " " + min);
     greenVal = Math.sin((days / 1800) * min);
     blueVal = Math.cos((days / 200) * hour);
     currMin = min;
