@@ -72,8 +72,8 @@ function updateStars() {
     // stars[i][0] = stars[i][4] + adjustmentPoint[0] * stars[i][2] / 10;
     // stars[i][1] = stars[i][5] + adjustmentPoint[1] * stars[i][2] / 10;
 
-    stars[i][0] += adjustmentPoint[0] * stars[i][2] / 10;
-    stars[i][1] += adjustmentPoint[1] * stars[i][2] / 10;
+    stars[i][0] = adjustmentPoint[0] * stars[i][2] / 10;
+    stars[i][1] = adjustmentPoint[1] * stars[i][2] / 10;
 
     if (stars[i][0] >= canvas.width + overshoot / 2) {
       stars[i][0] = -10;
