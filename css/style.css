@@ -5,7 +5,11 @@ html, body {
   height: 100%;
 }
 body {
-  background-color: #eee;
+  background: rgb(99,64,122);
+background: -moz-linear-gradient(0deg, rgba(99,64,122,1) 10%, rgba(198,103,103,1) 77%, rgba(201,127,21,1) 100%);
+background: -webkit-linear-gradient(0deg, rgba(99,64,122,1) 10%, rgba(198,103,103,1) 77%, rgba(201,127,21,1) 100%);
+background: linear-gradient(0deg, rgba(99,64,122,1) 10%, rgba(198,103,103,1) 77%, rgba(201,127,21,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#63407a",endColorstr="#c97f15",GradientType=1);
   position: relative;
 }
 #starfield {
@@ -14,13 +18,14 @@ body {
   left: 0;
   z-index: 0;
   background-color: #000;
+  background:transparent;
 }
 
 
 h1 {
   position: relative;
-  z-index: 1;
-  color: white;
+  z-index: 0;
+  color: black;
   text-align: center;
   font-family: 'Staatliches', cursive;
   font-size: 35pt;
@@ -30,8 +35,8 @@ h1 {
 
 h2 {
   position: relative;
-  z-index: 1;
-  color: white;
+  z-index: 0;
+  color: black;
   text-align: center;
   font-family: 'Dosis', sans-serif;
   margin-top: 2%;
@@ -40,13 +45,24 @@ h2 {
 h3 {
   position: relative;
   z-index: 1;
-  color: white;
+  color: black;
   text-align: center;
   font-family: 'Dosis', sans-serif;
+}
+
+h4 {
+  position: relative;
+  z-index: 1;
+  color: black;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  text-decoration: underline overline;
 }
 
 a {
   padding-left: 5px;
   padding-right: 5px;
   text-decoration: none;
+  z-index: 1;
+  color: black;
 }

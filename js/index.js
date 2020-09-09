@@ -41,7 +41,7 @@ function makeStars(DENSITY) {
   for (var i = 0; i < totalStars; i++) {
     randomX = Math.random() * (canvas.width - 1 + overshoot) + 1 - overshoot / 2;
     randomY = Math.random() * (canvas.height - 1 + overshoot) + 1 - overshoot / 2;
-    randomZ = Math.random() * 10;
+    randomZ = Math.random() * 7;
     color = randColor();
     stars[i] = [randomX, randomY, randomZ, color, randomX, randomY];
     sortable.push(randomZ);
@@ -56,9 +56,9 @@ function makeStars(DENSITY) {
 
 function drawStars() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  //context.fillStyle = "#FF0000";
+  context.fillStyle = "rgba(255, 255, 255, 0.5)"
   for (var i in stars) {
-    context.fillStyle = stars[i][3];
+    //context.fillStyle = stars[i][3];
     context.fillRect(stars[i][0], stars[i][1], stars[i][2], stars[i][2]);
     //context.fill();
   }
@@ -69,29 +69,32 @@ function drawStars() {
 function updateStars() {
   for (var i in stars) {
 
-    // stars[i][0] = stars[i][4] + adjustmentPoint[0] * stars[i][2] / 10;
-    // stars[i][1] = stars[i][5] + adjustmentPoint[1] * stars[i][2] / 10;
+    stars[i][0] = stars[i][4] + adjustmentPoint[0] * (stars[i][2] * 2);
+    stars[i][1] = stars[i][5] + adjustmentPoint[1] * (stars[i][2] * 2);
 
-    stars[i][0] += adjustmentPoint[0] * stars[i][2] / 10;
-    stars[i][1] += adjustmentPoint[1] * stars[i][2] / 10;
+    //stars[i][4] += adjustmentPoint[0] * stars[i][2] / 50;
+    stars[i][5] += 2 * stars[i][2] / 50;
 
-    if (stars[i][0] >= canvas.width + overshoot / 2) {
-      stars[i][0] = -10;
+    //console.log()
+
+    if (stars[i][4] >= canvas.width + overshoot / 2) {
+      stars[i][4] = -15;
     }
-    if (stars[i][1] >= canvas.height + overshoot / 2) {
-      stars[i][1] = -10;
+    if (stars[i][5] >= canvas.height + overshoot / 2) {
+      stars[i][5] = -15;
     }
-    if (stars[i][0] < -overshoot / 2) {
-      stars[i][0] = canvas.width;
+    if (stars[i][4] < -overshoot / 2) {
+      stars[i][4] = canvas.width + 10;
     }
-    if (stars[i][1] < -overshoot / 2) {
-      stars[i][1] = canvas.height;
+    if (stars[i][5] < -overshoot / 2) {
+      stars[i][5] = canvas.height + 10;
     }
 
   }
 }
 
 function randColor() {
+  //return "#FDB813";
   var colors = ["#FF0021", "#FF7630", "#FFFA51", "#00B951", "#0075F7"];
   var i = Math.floor(Math.random() * 5);
   return colors[i];
