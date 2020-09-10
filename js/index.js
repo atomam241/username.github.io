@@ -1,3 +1,6 @@
+// forked from https://codepen.io/easymac/pen/EJHDj
+
+
 var canvas = document.getElementById("starfield");
 var context = canvas.getContext("2d");
 canvas.width = document.body.clientWidth;
@@ -56,9 +59,9 @@ function makeStars(DENSITY) {
 
 function drawStars() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  context.fillStyle = "rgba(255, 255, 255, 0.5)"
+  //context.fillStyle = "rgba(255, 255, 255, 0.5)"
   for (var i in stars) {
-    //context.fillStyle = stars[i][3];
+    context.fillStyle = stars[i][3];
     context.fillRect(stars[i][0], stars[i][1], stars[i][2], stars[i][2]);
     //context.fill();
   }
