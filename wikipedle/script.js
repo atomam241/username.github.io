@@ -10,7 +10,7 @@ document.getElementById("sharebutton").addEventListener("click", async () => {
 	try {
 		const regex = /(<br>)+/g;
 		let shareText = document.getElementById("sharedata").innerHTML.replace(regex, "\n");
-		shareText += window.location.href;
+		shareText += '\n' + window.location.href;
 		navigator.clipboard.writeText(shareText).then(() => {
 			alert("Copied to clipboard!");
 		});
@@ -70,7 +70,7 @@ function game_over(win) {
 		document.getElementById("sharedata").innerHTML += "&#x1F9E0";
 	}
 	let motivator = ["You're Insane!", "...are you Ken Jennigs?", "ehh thats par", "Study Up", "Do you live under a rock?", "It was obvious..."];
-	ans_html += "<br>" + motivator[guessNum - 1];
+	ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
 	$("#answer").html(ans_html);
 	togglePanel("end", "block");
 	setCookie('seenAbout', true, 100, false)
