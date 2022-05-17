@@ -92,7 +92,7 @@ function setCookie(cookieName, cookieValue, daysToExpire, atMidnight) {
 
 function getCookieValue(cookieName) {
 	var cookieValue = document.cookie.match("(^|;)\\s*" + cookieName + "\\s*=\\s*([^;]+)");
-	return cookieValue ? cookieValue.pop() : "";
+	return cookieValue ? cookieValue.pop() : false;
 }
 
 function share() {
@@ -209,13 +209,14 @@ $("#searchbtn").click(function(e) {
 });
 // show about if you have never played
 cookie = getCookieValue("seenAbout")
-if (cookie) {
+console.log(guesses)
+if (!cookie) {
 	togglePanel("about", "block");
 }
 // setup game if you already played
-guesses = parseInt(getCookieValue("guessNum"))
-console.log(guesses)
+guesses = getCookieValue("guessNum")
 if (guesses) {
+	guesses = parseInt(guesses)
 	togglePanel("end", "block");
 	show_all_clues(guesses)
 	
