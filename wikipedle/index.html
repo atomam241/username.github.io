@@ -1,1 +1,110 @@
-<script async src="//jsfiddle.net/owen_m14/b8zc4k0a/7/embed/"></script>
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Wikipedle</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="wrapper" class="center">
+  <div id="header">
+
+    <div class="absleft">
+      <a href="https://account.venmo.com/u/OwenMcC" target="_blank" title="Consider Buying me a coffee">
+        <button class="smallbutton">
+          <span class="material-icons">local_cafe</span>
+        </button>
+      </a>
+
+      <a href="https://www.linkedin.com/in/owen-mcclure/" target="_blank" title="Open to work">
+        <svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+        </svg>
+      </a>
+
+    </div>
+
+    <div class="absright">
+
+      <button class="smallbutton" onclick="share()" title="About Numble">
+        <span class="material-icons">share</span>
+      </button>
+
+      <button class="smallbutton" onclick="togglePanel('about','block')" title="About Numble">
+        <span class="material-icons">question_mark</span>
+      </button>
+    </div>
+
+    <h1><span id="game_title">Wikipedle</span></h1>
+  </div>
+  <hr>
+  <br>
+  <div id="cluewrap">
+    <div id="clue1" class="clue">&#x1F4DA; </div>
+    <br>
+    <div id="clue2" class="clue">&#x1F4F0; </div>
+    <br>
+    <div id="clue3" class="clue">&#x1F440; </div>
+    <br>
+    <div id="clue4" class="clue">&#x1F926; </div>
+    <div id="clue5" class="clue">&#x1F926; </div>
+    <div id="clue6" class="clue">&#x1F926; </div>
+  </div>
+  <div id="result"></div>
+  <div id="search">
+
+    <input type="text" autocomplete="off" name="q" id="q" onKeyUp="showResults(this.value)" onfocus="showResults(this.value)" onblur="hideResults()">
+
+    <button type="submit" id="searchbtn">keyboard_return</button>
+
+  </div>
+
+</div>
+<div id="messages" class="flex">
+
+  <div id="about" class="">
+    <div class="absright"><button class="smallbutton" onclick="togglePanel('about', 'none')">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    <p><b>A Wikipedia game inspired by <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a></b></p><br>
+    <p>
+      You get ~7 tries to guess the title of the wikipedia article.</p><br>
+    <div id="info">
+      <p>The <b>First Clue</b> &#x1F4DA; is the section titles of the article.</p>
+      <p>The <b>Second Clue</b> &#x1F4F0; is the 5 sentences from the article with important words redacted.</p>
+      <p>The <b>Third Clue</b> &#x1F440; is a brief description of the article.</p>
+      <p>Then 3 <b>additional paragraphs</b> &#x1F926; will be added until the article is guessed or there<br>are no more paragraphs.</p>
+    </div>
+    <br>
+
+    <div class="absleft">
+      <form action="https://www.github.com/odm7341" target="_blank">
+        <button class="smallbutton">
+          <span class="material-icons">code</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="end" class="abscenter">
+    <div class="absright"><button class="smallbutton" onclick="togglePanel('end', 'none')">
+        <span class="material-icons">close</span>
+      </button></div>
+    <p id='answer'>LOL</p>
+    <br>
+    <p id="sharedata"></p>
+    <br>
+    <button id="sharebutton">Share</button>
+  </div>
+
+</div>
+<!-- partial -->
+  <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
