@@ -209,7 +209,7 @@ $("#searchbtn").click(function(e) {
 });
 // show about if you have never played
 cookie = getCookieValue("seenAbout")
-console.log(guesses)
+console.log(cookie)
 if (!cookie) {
 	togglePanel("about", "block");
 }
