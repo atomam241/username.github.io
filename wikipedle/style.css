@@ -106,7 +106,7 @@ svg:hover {
 }
 
 .flex {
-  display: inline-block;
+  display: none;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -138,7 +138,7 @@ svg:hover {
 }
 #about {
   width: auto;
-  display: inline-block;
+  display: none;
 }
 
 #clue1 {
