@@ -126,7 +126,7 @@ function load_game() {
 function display_clue1(clue1) {
 	clue_string = "";
 	for (let i = 0; i < clue1.length - 1; i++) {
-		clue_string += clue1[i] + ", ";
+		clue_string += clue1[i] + ",  ";
 	}
 	clue_string += clue1[clue1.length - 1];
 	return clue_string;
@@ -150,10 +150,14 @@ function read_clue(clueNum) {
 }
 
 function start_game(data) {
-	clues = data[0]["clues"];
+	//the game index is the day
+	let d = new Date();
+	g_idx = d.getDate();
+	
+	clues = data[g_idx]["clues"];
 	guessNum = 0;
 	total = 5;
-	title = data[0]["answer"];
+	title = data[g_idx]["answer"];
 	add_clue(0, display_clue1(clues[0]));
 	ready = 1;
 	// setup game if you already played
@@ -163,7 +167,7 @@ function start_game(data) {
 		guessNum = guesses
 		sharedata = getCookieValue('shareData');
 		$("#sharedata").html(sharedata)
-		game_over(true)
+		game_over(false)
 		show_all_clues(guesses);
 		
 	}
