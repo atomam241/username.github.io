@@ -9,7 +9,7 @@ function togglePanel(element, display) {
 document.getElementById("sharebutton").addEventListener("click", async () => {
 	try {
 		const regex = /(<br>)+/g;
-		let shareText = "Wikipedle\n";
+		let shareText = "Wikipedle "+ guessNum +" tries.\n";
 		shareText += document.getElementById("sharedata").innerHTML.replace(regex, "\n");
 		shareText += '\n' + window.location.href;
 		navigator.clipboard.writeText(shareText).then(() => {
