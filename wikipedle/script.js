@@ -157,6 +157,14 @@ function start_game(data) {
 	title = data[0]["answer"];
 	add_clue(0, display_clue1(clues[0]));
 	ready = 1;
+	// setup game if you already played
+	guesses = getCookieValue("guessNum")
+	if (guesses) {
+		guesses = parseInt(guesses)
+		togglePanel("end", "block");
+		show_all_clues(guesses)
+		
+	}
 }
 
 function make_guess(guess) {
@@ -213,12 +221,5 @@ console.log(cookie)
 if (!cookie) {
 	togglePanel("about", "block");
 }
-// setup game if you already played
-guesses = getCookieValue("guessNum")
-if (guesses) {
-	guesses = parseInt(guesses)
-	togglePanel("end", "block");
-	show_all_clues(guesses)
-	
-}
+
 load_game();
