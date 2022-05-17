@@ -167,6 +167,7 @@ function start_game(data) {
 		guesses = parseInt(guesses);
 		guessNum = guesses
 		sharedata = getCookieValue('shareData');
+		console.log(shareData)
 		$("#sharedata").html(sharedata)
 		game_over(false)
 		show_all_clues(guesses);
