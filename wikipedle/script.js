@@ -9,7 +9,8 @@ function togglePanel(element, display) {
 document.getElementById("sharebutton").addEventListener("click", async () => {
 	try {
 		const regex = /(<br>)+/g;
-		let shareText = document.getElementById("sharedata").innerHTML.replace(regex, "\n");
+		let shareText = "Wikipedle\n";
+		shareText += document.getElementById("sharedata").innerHTML.replace(regex, "\n");
 		shareText += '\n' + window.location.href;
 		navigator.clipboard.writeText(shareText).then(() => {
 			alert("Copied to clipboard!");
