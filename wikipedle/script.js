@@ -62,7 +62,7 @@ var clues = "";
 var ready = false;
 var gameover = false;
 
-function game_over(text, win) {
+function game_over(win) {
 	gameover = true;
 	let ans_html = '<a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a>";
 	if (win) {
@@ -73,7 +73,6 @@ function game_over(text, win) {
 	ans_html += "<br>" + motivator[guessNum - 1];
 	$("#answer").html(ans_html);
 	togglePanel("end", "block");
-	document.cookie = "seenAbout=1; expires=Fri, 31 Dec 2040 23:59:59 GMT";
 	setCookie('seenAbout', true, 100, false)
 	setCookie('playedToday', true, 1, true)
 	setCookie('shareData', $("#sharedata").html(), 1, true)
@@ -160,9 +159,12 @@ function start_game(data) {
 	// setup game if you already played
 	guesses = getCookieValue("guessNum")
 	if (guesses) {
-		guesses = parseInt(guesses)
-		togglePanel("end", "block");
-		show_all_clues(guesses)
+		guesses = parseInt(guesses);
+		guessNum = guesses
+		sharedata = getCookieValue('shareData');
+		$("#sharedata").html(sharedata)
+		game_over(true)
+		show_all_clues(guesses);
 		
 	}
 }
@@ -176,14 +178,14 @@ function make_guess(guess) {
 	guessNum += 1;
 	if (guess.toLowerCase() == title.toLowerCase()) {
 		// winnner
-		game_over(guess, true);
+		game_over(true);
 	} else {
 		console.log(guessNum);
 		$("#clue" + guessNum).css({
 			color: "#f22"
 		});
 		if (guessNum > total) {
-			game_over(guess, false);
+			game_over(false);
 			return;
 		}
 		add_clue(guessNum, clues[guessNum]);
