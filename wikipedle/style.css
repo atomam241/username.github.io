@@ -60,6 +60,11 @@ svg:hover {
   height: 45px;
 }
 
+#messages {
+  width: 100%;
+  height: 100%;
+}
+
 .material-icons {
   top: 0;
   width: 100%;
