@@ -152,7 +152,7 @@ function display_clue0(clue0) {
 	clue_string += clue0[clue0.length - 1];
 	return clue_string;
 }
-var emojis = ["&#x1F4DA; ", "&#x1F4F0; ", "&#x1F440; ", "&#x1F926; ", "&#x1F926; ", "&#x1F926; "];
+var emojis = ["&#x1F4DA; ", "&#x1F4F0; ", "&#x1F440; ", "&#x1F926; ", "&#x1F926; ", "&#x1F926; ", "&#x1F614; "];
 
 function add_clue(clueNum, html) {
 	document.getElementById("clue" + clueNum).innerHTML = emojis[clueNum] + html;
