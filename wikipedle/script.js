@@ -68,6 +68,23 @@ var clues = "";
 var ready = false;
 var gameover = false;
 
+function sToMidnight() {
+	// get the seconds to midnight for local storage exipation
+	var now = new Date();
+	var night = new Date(
+		now.getFullYear(),
+		now.getMonth(),
+		now.getDate() + 1, // the next day, ...
+		0, 0, 0 // ...at 00:00:00 hours
+	);
+	return (night.getTime() - now.getTime()) / 1000;
+}
+
+
+
+
+
+
 function game_over(win) {
 	gameover = true;
 	let ans_html = '<a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a>";
@@ -79,9 +96,13 @@ function game_over(win) {
 	ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
 	$("#answer").html(ans_html);
 	togglePanel("end", "block");
-	setCookie('seenAbout', true, 100, false)
-	setCookie('shareData', $("#sharedata").html(), 1, true)
-	setCookie('guessNum', guessNum, 1, true)
+	sec = sToMidnight()
+	ls.set('seenAbout', true, { ttl: 99999 });
+	//setCookie('seenAbout', true, 100, false)
+	ls.set('shareData', $("#sharedata").html(), { ttl: sec });
+	//setCookie('shareData', $("#sharedata").html(), 1, true)
+	ls.set('guessNum', guessNum, { ttl: sec });
+	//setCookie('guessNum', guessNum, 1, true)
 }
 
 function setCookie(cookieName, cookieValue, daysToExpire, atMidnight) {
@@ -167,7 +188,8 @@ function start_game(data) {
 	document.getElementById("sharedata").innerHTML += emojis[guessNum];
 	ready = 1;
 	// setup game if you already played
-	guesses = getCookieValue("guessNum")
+	guesses = ls.get('guessNum');
+	//guesses = getCookieValue("guessNum")
 	if (guesses) {
 		guesses = parseInt(guesses);
 		if (guesses < 1) {
@@ -175,7 +197,8 @@ function start_game(data) {
 		}
 		guessNum = guesses
 		show_all_clues(guesses);
-		sharedata = getCookieValue('shareData');
+		sharedata = ls.get('shareData');
+		//sharedata = getCookieValue('shareData');
 		//console.log(shareData)
 		$("#sharedata").html(sharedata)
 		game_over(false)
@@ -247,7 +270,8 @@ function submit_guess() {
 }
 
 // show about if you have never played
-cookie = getCookieValue("seenAbout")
+//cookie = getCookieValue("seenAbout")
+cookie = ls.get('seenAbout');
 //console.log(cookie)
 if (!cookie) {
 	togglePanel("about", "block");
