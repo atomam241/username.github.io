@@ -228,12 +228,14 @@ function show_all_clues(numRed){
 			$("#clue" + i).css({
 				color: "#ff2"
 			});
+		}else {
+			add_clue(i, clues[i]);
+			$("#clue" + i).css({
+				opacity: 1,
+				color: "#2f2"
+			});
 		}
-		add_clue(i, clues[i]);
-		$("#clue" + i).css({
-			opacity: 1,
-			color: "#2f2"
-		});
+
 		
 	}
 }
