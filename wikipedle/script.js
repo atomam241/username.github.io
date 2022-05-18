@@ -9,7 +9,7 @@ function togglePanel(element, display) {
 document.getElementById("sharebutton").addEventListener("click", async () => {
 	try {
 		const regex = /(<br>)+/g;
-		let shareText = "Wikipedle "+ guessNum +" tries.\n";
+		let shareText = "Wikipedle " + guessNum + " tries.\n";
 		shareText += document.getElementById("sharedata").innerHTML.replace(regex, "\n");
 		shareText += '\n' + window.location.href;
 		navigator.clipboard.writeText(shareText).then(() => {
@@ -21,8 +21,8 @@ document.getElementById("sharebutton").addEventListener("click", async () => {
 });
 
 //select the text in input
-$(document).ready(function() {
-    $("input:text").focus(function() { $(this).select(); } );
+$(document).ready(function () {
+	$("input:text").focus(function () { $(this).select(); });
 });
 
 function showResults(val) {
@@ -37,7 +37,7 @@ function showResults(val) {
 		type: "POST",
 		url: "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=" + val + "&srnamespace=0",
 		dataType: "jsonp",
-		success: function(result, status, xhr) {
+		success: function (result, status, xhr) {
 			data = result["query"]["search"];
 			list = [];
 			for (i = 0; i < data.length; i++) {
@@ -47,7 +47,7 @@ function showResults(val) {
 			res.style.display = "block";
 			return true;
 		},
-		error: function(xhr, status, error) {
+		error: function (xhr, status, error) {
 			alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
 		}
 	});
@@ -111,7 +111,7 @@ function share() {
 
 function load_game() {
 	var answer = "";
-	$.getJSON("https://raw.githubusercontent.com/odm7341/wikipedle/main/test.json", function(data) {
+	$.getJSON("https://raw.githubusercontent.com/odm7341/wikipedle/main/test.json", function (data) {
 		/*
 		clues = data[0]["clues"];
 		display_clue1(data[0]["clues"][0]);
@@ -158,27 +158,28 @@ function start_game(data) {
 	//the game index is the date
 	let d = new Date();
 	g_idx = d.getDate();
-	
+
 	clues = data[g_idx]["clues"];
 	guessNum = 0;
 	total = 5;
 	title = data[g_idx]["answer"];
 	add_clue(0, display_clue0(clues[0]));
+	document.getElementById("sharedata").innerHTML += emojis[guessNum];
 	ready = 1;
 	// setup game if you already played
 	guesses = getCookieValue("guessNum")
 	if (guesses) {
 		guesses = parseInt(guesses);
-		if (guesses < 1){
+		if (guesses < 1) {
 			guesses = 1
 		}
 		guessNum = guesses
+		show_all_clues(guesses);
 		sharedata = getCookieValue('shareData');
 		//console.log(shareData)
 		$("#sharedata").html(sharedata)
 		game_over(false)
-		show_all_clues(guesses);
-		
+
 	}
 }
 
@@ -191,23 +192,23 @@ function make_guess(guess) {
 	document.getElementById("sharedata").innerHTML += emojis[guessNum];
 	if (guess.toLowerCase() == title.toLowerCase()) {
 		// winnner
-		$("#clue" + guessNum-1).css({
+		$("#clue" + guessNum - 1).css({
 			color: "#2f2"
 		});
-		for (let i=guessNum; i < clues.length; i++){
+		for (let i = guessNum; i < clues.length; i++) {
 			add_clue(i, clues[i])
 			$("#clue" + i).css({
 				color: "#2f2"
 			});
-			
+
 		}
-		$("#clue" + (guessNum-1)).css({
+		$("#clue" + (guessNum - 1)).css({
 			color: "#ff2"
 		});
 		game_over(true);
 	} else {
 		//console.log(guessNum);
-		$("#clue" + (guessNum-1)).css({
+		$("#clue" + (guessNum - 1)).css({
 			color: "#f22"
 		});
 		if (guessNum > total) {
@@ -218,29 +219,29 @@ function make_guess(guess) {
 	}
 }
 
-function show_all_clues(numRed){
-	for (let i = 0; i < clues.length; i++){
-		if (i < numRed){
+function show_all_clues(numRed) {
+	for (let i = 0; i < clues.length; i++) {
+		if (i < numRed) {
 			$("#clue" + i).css({
 				color: "#f22"
-			});						
-		}else if (i == numRed){
+			});
+		} else if (i == numRed) {
 			$("#clue" + i).css({
 				color: "#ff2"
 			});
-		}else {
+		} else {
 			$("#clue" + i).css({
 				opacity: 1,
 				color: "#2f2"
 			});
 		}
 		add_clue(i, clues[i]);
-		
+
 	}
 }
 
 
-function submit_guess(){
+function submit_guess() {
 	guess = $("#q").val();
 	make_guess(guess);
 }

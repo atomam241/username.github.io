@@ -178,6 +178,10 @@ svg:hover {
 .clue {
   opacity: 0;
   transition: color 0.5s, opacity 1s;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 2s;
+  transition-duration: 2s;
   color: #fff;
   text-align: left;
   font-family: sans-serif;
