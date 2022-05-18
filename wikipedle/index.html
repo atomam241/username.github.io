@@ -44,22 +44,23 @@
   <hr>
   <br>
   <div id="cluewrap">
-    <div id="clue1" class="clue">&#x1F4DA; </div>
+    <div id="clue0" class="clue">&#x1F4DA; </div>
     <br>
-    <div id="clue2" class="clue">&#x1F4F0; </div>
+    <div id="clue1" class="clue">&#x1F4F0; </div>
     <br>
-    <div id="clue3" class="clue">&#x1F440; </div>
+    <div id="clue2" class="clue">&#x1F440; </div>
     <br>
+    <div id="clue3" class="clue">&#x1F926; </div>
     <div id="clue4" class="clue">&#x1F926; </div>
     <div id="clue5" class="clue">&#x1F926; </div>
-    <div id="clue6" class="clue">&#x1F926; </div>
   </div>
   <div id="result"></div>
   <div id="search">
 
-    <input type="text" autocomplete="off" name="q" id="q" onKeyUp="showResults(this.value)" onfocus="showResults(this.value)" onblur="hideResults()">
+    <input type="text" autocomplete="off" name="q" id="q" onkeydown = "if (event.keyCode == 13)
+    submit_guess()" onKeyUp="showResults(this.value)" onfocus="showResults(this.value)" onblur="hideResults()">
 
-    <button type="submit" id="searchbtn">keyboard_return</button>
+    <button type="submit" onCLick="submit_guess()" id="searchbtn">keyboard_return</button>
 
   </div>
 

@@ -141,14 +141,14 @@ svg:hover {
   display: none;
 }
 
-#clue1 {
+#clue0 {
   font-family: times, serif;
   font-weight: bold;
   font-size: 24px;
   opacity: 0;
 }
 
-#clue3 {
+#clue2 {
   font-style: italic;
   font-size: 20px;
 }
@@ -180,7 +180,7 @@ svg:hover {
   transition: color 0.5s, opacity 1s;
   color: #fff;
   text-align: left;
-  font-family: "Times New Roman", Times, serif;
+  font-family: sans-serif;
 }
 
 #result {

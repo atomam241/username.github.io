@@ -20,6 +20,11 @@ document.getElementById("sharebutton").addEventListener("click", async () => {
 	}
 });
 
+//select the text in input
+$(document).ready(function() {
+    $("input:text").focus(function() { $(this).select(); } );
+});
+
 function showResults(val) {
 	res = document.getElementById("result");
 	//res.style.display = "block";
@@ -70,7 +75,7 @@ function game_over(win) {
 		ans_html += " is correct! &#x1F9E0";
 		document.getElementById("sharedata").innerHTML += "&#x1F9E0";
 	}
-	let motivator = ["You're Insane!", "...are you Ken Jennigs?", "ehh thats par", "Study Up", "Do you live under a rock?", "It was obvious..."];
+	let motivator = ["You're Insane!", "...are you Ken Jennigs?", "par", "Close one!", "Whew...", "You'd better read that article!"];
 	ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
 	$("#answer").html(ans_html);
 	togglePanel("end", "block");
@@ -123,7 +128,7 @@ function load_game() {
 	}).then((game_data) => start_game(game_data));
 }
 
-function display_clue1(clue1) {
+function display_clue0(clue0) {
 	clue_string = "";
 	for (let i = 0; i < clue1.length - 1; i++) {
 		clue_string += clue1[i] + ",  ";
@@ -134,12 +139,12 @@ function display_clue1(clue1) {
 var emojis = ["&#x1F4DA; ", "&#x1F4F0; ", "&#x1F440; ", "&#x1F926; ", "&#x1F926; ", "&#x1F926; "];
 
 function add_clue(clueNum, html) {
-	document.getElementById("clue" + (clueNum + 1)).innerHTML = emojis[clueNum] + html;
-	document.getElementById("clue" + (clueNum + 1)).style.opacity = 1;
+	document.getElementById("clue" + clueNum).innerHTML = emojis[clueNum] + html;
+	document.getElementById("clue" + clueNum).style.opacity = 1;
 }
 
 function read_clue(clueNum) {
-	var innerHtml = document.getElementById("clue" + (clueNum + 1)).innerHTML;
+	var innerHtml = document.getElementById("clue" + clueNum).innerHTML;
 	/*document.getElementById("clue" + (clueNum + 1)).style.animation =
 	  "fadeOut 5s forward";
 	if (clueNum > 3) {
@@ -186,10 +191,13 @@ function make_guess(guess) {
 	guessNum += 1;
 	if (guess.toLowerCase() == title.toLowerCase()) {
 		// winnner
+		$("#clue" + (guessNum)).css({
+			color: "#2f2"
+		});
 		game_over(true);
 	} else {
 		console.log(guessNum);
-		$("#clue" + guessNum).css({
+		$("#clue" + (guessNum)).css({
 			color: "#f22"
 		});
 		if (guessNum > total) {
@@ -197,7 +205,7 @@ function make_guess(guess) {
 			return;
 		}
 		add_clue(guessNum, clues[guessNum]);
-		$("#clue" + guessNum + 1).css({
+		$("#clue" + guessNum).css({
 			opacity: 1
 		});
 	}
@@ -206,12 +214,16 @@ function make_guess(guess) {
 function show_all_clues(numRed){
 	for (let i = 0; i < clues.length; i++){
 		if (i < numRed){
-			$("#clue" + (i+1)).css({
+			$("#clue" + i).css({
 				color: "#f22"
 			});						
+		}if (i == numRed){
+			$("#clue" + i).css({
+				color: "#2f2"
+			});
 		}
 		add_clue(i, clues[i]);
-		$("#clue" + (i+1)).css({
+		$("#clue" + i).css({
 			opacity: 1
 		});
 		
@@ -219,15 +231,14 @@ function show_all_clues(numRed){
 }
 
 
-//check for the answer
-$("#searchbtn").click(function(e) {
-	e.preventDefault();
+function submit_guess(){
 	guess = $("#q").val();
 	make_guess(guess);
-});
+}
+
 // show about if you have never played
 cookie = getCookieValue("seenAbout")
-console.log(cookie)
+//console.log(cookie)
 if (!cookie) {
 	togglePanel("about", "block");
 }
