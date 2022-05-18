@@ -151,7 +151,7 @@ function read_clue(clueNum) {
 }
 
 function start_game(data) {
-	//the game index is the day
+	//the game index is the date
 	let d = new Date();
 	g_idx = d.getDate();
 	
@@ -164,10 +164,10 @@ function start_game(data) {
 	// setup game if you already played
 	guesses = getCookieValue("guessNum")
 	if (guesses) {
-		guesses = parseInt(guesses);
+		guesses = parseInt(guesses) + 1;
 		guessNum = guesses
 		sharedata = getCookieValue('shareData');
-		console.log(shareData)
+		//console.log(shareData)
 		$("#sharedata").html(sharedata)
 		game_over(false)
 		show_all_clues(guesses);
