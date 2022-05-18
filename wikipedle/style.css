@@ -225,6 +225,7 @@ svg:hover {
 }
 
 #q {
+  border: 3px solid black;
   display: flex;
   float: left;
   padding-top: 10px;
@@ -237,6 +238,7 @@ svg:hover {
 
 #searchbtn {
   font-family: "Material Icons";
+  border: 3px solid black;
   color: #000;
   background-color: #ddd;
   font-weight: normal;
