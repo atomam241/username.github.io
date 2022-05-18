@@ -194,6 +194,16 @@ function make_guess(guess) {
 		$("#clue" + guessNum-1).css({
 			color: "#2f2"
 		});
+		for (let i=guessNum; i < clues.length; i++){
+			add_clue(i, clues[i])
+			$("#clue" + i).css({
+				color: "#2f2"
+			});
+			
+		}
+		$("#clue" + (guessNum-1)).css({
+			color: "#ff2"
+		});
 		game_over(true);
 	} else {
 		//console.log(guessNum);
@@ -206,7 +216,6 @@ function make_guess(guess) {
 		}
 		add_clue(guessNum, clues[guessNum]);
 	}
-	guessNum += 1;
 }
 
 function show_all_clues(numRed){
@@ -217,12 +226,13 @@ function show_all_clues(numRed){
 			});						
 		}if (i == numRed){
 			$("#clue" + i).css({
-				color: "#2f2"
+				color: "#ff2"
 			});
 		}
 		add_clue(i, clues[i]);
 		$("#clue" + i).css({
-			opacity: 1
+			opacity: 1,
+			color: "#2f2"
 		});
 		
 	}
