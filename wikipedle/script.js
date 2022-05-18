@@ -239,6 +239,7 @@ function make_guess(guess) {
 			return;
 		}
 		add_clue(guessNum, clues[guessNum]);
+		window.scrollTo(0, document.body.scrollHeight);
 	}
 }
 
