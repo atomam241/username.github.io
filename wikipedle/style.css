@@ -31,17 +31,16 @@ h1 {
   line-height: 25px;
 }
 
-button {
+
+.smallbutton {
+  height: 35px;
+  background: transparent;
   cursor: pointer;
   border: none;
   position: relative;
   display: inline-block;
 }
 
-.smallbutton {
-  height: 35px;
-  background: transparent;
-}
 .smallbutton:hover,
 .smallbutton:hover span {
   color: #aaa;
@@ -79,7 +78,9 @@ svg:hover {
   background: #555;
   border-radius: 6px;
   margin: 2px;
+  border: 0px;
 }
+
 .absleft {
   position: absolute;
   float: left;
@@ -118,6 +119,7 @@ svg:hover {
   z-index: 5;
   /*   pointer-events: none; */
 }
+
 .abscenter {
   position: absolute;
   inset: 0;
@@ -133,9 +135,11 @@ svg:hover {
   transform-style: flat;
   perspective: 1000;
 }
+
 #end {
   display: none;
 }
+
 #about {
   width: auto;
   display: none;
@@ -201,10 +205,12 @@ svg:hover {
   bottom: 60px;
   display: none;
 }
+
 #result ul {
   list-style-type: none;
   padding: 10px 0px 10px 0px;
 }
+
 #result li,
 #about li {
   padding: 5px 0;
@@ -212,6 +218,7 @@ svg:hover {
   margin-right: 5px;
   line-height: 25px;
 }
+
 #result ul li:hover {
   background: #333;
 }
@@ -219,34 +226,44 @@ svg:hover {
 #search {
   z-index: 1;
   float: left;
-  background-color: #333;
   position: fixed;
-  bottom: 10px;
+  bottom: 5px;
+  font-size: 20px;
 }
 
 #q {
   border: 3px solid black;
+  border-radius: 0%;
   display: flex;
   float: left;
   padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 20px;
+  font-size: inherit;
   text-align: left;
-  width: 200px;
+  width: 250px;
   color: #888;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
 }
 
 #searchbtn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
   font-family: "Material Icons";
   border: 3px solid black;
   color: #000;
   background-color: #ddd;
   font-weight: normal;
   font-style: normal;
-  font-size: 36px;
+  font-size: 24px;
+  width: 35px;
   float: left;
   display: flex;
-  height: 45px;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
 }
 
 #gamedata {
