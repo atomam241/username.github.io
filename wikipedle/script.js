@@ -130,10 +130,10 @@ function load_game() {
 
 function display_clue0(clue0) {
 	clue_string = "";
-	for (let i = 0; i < clue1.length - 1; i++) {
-		clue_string += clue1[i] + ",  ";
+	for (let i = 0; i < clue0.length - 1; i++) {
+		clue_string += clue0[i] + ",  ";
 	}
-	clue_string += clue1[clue1.length - 1];
+	clue_string += clue0[clue0.length - 1];
 	return clue_string;
 }
 var emojis = ["&#x1F4DA; ", "&#x1F4F0; ", "&#x1F440; ", "&#x1F926; ", "&#x1F926; ", "&#x1F926; "];
@@ -163,7 +163,7 @@ function start_game(data) {
 	guessNum = 0;
 	total = 5;
 	title = data[g_idx]["answer"];
-	add_clue(0, display_clue1(clues[0]));
+	add_clue(0, display_clue0(clues[0]));
 	ready = 1;
 	// setup game if you already played
 	guesses = getCookieValue("guessNum")
@@ -187,17 +187,17 @@ function make_guess(guess) {
 		alert("Im not ready yet...");
 		return;
 	}
-	document.getElementById("sharedata").innerHTML += emojis[guessNum];
 	guessNum += 1;
+	document.getElementById("sharedata").innerHTML += emojis[guessNum];
 	if (guess.toLowerCase() == title.toLowerCase()) {
 		// winnner
-		$("#clue" + (guessNum)).css({
+		$("#clue" + guessNum-1).css({
 			color: "#2f2"
 		});
 		game_over(true);
 	} else {
-		console.log(guessNum);
-		$("#clue" + (guessNum)).css({
+		//console.log(guessNum);
+		$("#clue" + (guessNum-1)).css({
 			color: "#f22"
 		});
 		if (guessNum > total) {
@@ -205,10 +205,8 @@ function make_guess(guess) {
 			return;
 		}
 		add_clue(guessNum, clues[guessNum]);
-		$("#clue" + guessNum).css({
-			opacity: 1
-		});
 	}
+	guessNum += 1;
 }
 
 function show_all_clues(numRed){
