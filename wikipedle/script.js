@@ -75,7 +75,6 @@ function game_over(win) {
 	$("#answer").html(ans_html);
 	togglePanel("end", "block");
 	setCookie('seenAbout', true, 100, false)
-	setCookie('playedToday', true, 1, true)
 	setCookie('shareData', $("#sharedata").html(), 1, true)
 	setCookie('guessNum', guessNum, 1, true)
 }
@@ -164,7 +163,10 @@ function start_game(data) {
 	// setup game if you already played
 	guesses = getCookieValue("guessNum")
 	if (guesses) {
-		guesses = parseInt(guesses) + 1;
+		guesses = parseInt(guesses);
+		if (guesses < 1){
+			guesses = 1
+		}
 		guessNum = guesses
 		sharedata = getCookieValue('shareData');
 		//console.log(shareData)
