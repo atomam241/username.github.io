@@ -9,7 +9,7 @@ function togglePanel(element, display) {
 document.getElementById("sharebutton").addEventListener("click", async () => {
 	try {
 		const regex = /(<br>)+/g;
-		let shareText = "Wikipedle " + guessNum + " tries.\n";
+		let shareText = "Wikipedle; " + guessNum + " tries.\n";
 		shareText += document.getElementById("sharedata").innerHTML.replace(regex, "\n");
 		shareText += '\n' + window.location.href;
 		navigator.clipboard.writeText(shareText).then(() => {
@@ -67,7 +67,7 @@ var title = "";
 var clues = "";
 var ans_html = "";
 var ready = false;
-var gameover = false;
+var gameover = true;
 
 function sToMidnight() {
 	// get the seconds to midnight for local storage exipation
@@ -81,16 +81,29 @@ function sToMidnight() {
 	return (night.getTime() - now.getTime()) / 1000;
 }
 
-
-
-
-
-
-function game_over() {
+function game_over(win) {
 	gameover = true;
+	let motivator = ["You're Insane!", "...are you Ken Jennigs?", "...par", "...close one!", "Whew...", "...too close for comfort"];
+	if (win) {
+		ans_html = '<a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a> is correct! &#x1F9E0";
+		ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
+		document.getElementById("sharedata").innerHTML += "&#x1F9E0";
+	} else {
+		ans_html = 'The answer is <a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a>";
+		ans_html += "<br><i>...gonna tank your average</i>";
+		document.getElementById("sharedata").innerHTML += "&#x1F614";
+	}
+	let totDays = ls.get('totDays') + 1
+	let totGuess = ls.get('totGuess') + guessNum
+	ls.set('totDays', totDays);
+	ls.set('totGuess', totGuess);
+	$("#sharedata").html('Guess Average: '+ (totGuess/totDays) +"<br>"+ $("#sharedata").html());
+
+	$("#answer").html(ans_html);
+
 	togglePanel("end", "block");
 	sec = sToMidnight()
-	ls.set('seenAbout', true, { ttl: 99999 });
+	ls.set('seenAbout', true);
 	//setCookie('seenAbout', true, 100, false)
 	ls.set('shareData', $("#sharedata").html(), { ttl: sec });
 	//setCookie('shareData', $("#sharedata").html(), 1, true)
@@ -186,10 +199,11 @@ function start_game(data) {
 		//console.log(shareData)
 		$("#sharedata").html(sharedata);
 		$("#answer").html(ls.get('ans_html'));
-		game_over()
+		togglePanel("end", "block");
 		return
 	}
 	//the game index is the date
+	gameover = false;
 	let d = new Date();
 	g_idx = d.getDate();
 
@@ -198,19 +212,21 @@ function start_game(data) {
 	total = 5;
 	title = data[g_idx]["answer"];
 	add_clue(0, clues[0]);
-	document.getElementById("sharedata").innerHTML += emojis[guessNum];
+	//document.getElementById("sharedata").innerHTML += emojis[guessNum];
 	ready = 1;
 	// setup game if you already played
 }
 
 function make_guess(guess) {
+	if (gameover){
+		return;
+	}
 	if (!ready) {
 		alert("Im not ready yet...");
 		return;
 	}
 	guessNum += 1;
-	document.getElementById("sharedata").innerHTML += emojis[guessNum];
-	let motivator = ["You're Insane!", "...are you Ken Jennigs?", "...par", "...close one!", "Whew...", "...better luck next time"];
+	document.getElementById("sharedata").innerHTML += emojis[guessNum - 1];
 	if (guess.toLowerCase() == title.toLowerCase()) {
 		// winnner
 		$("#clue" + guessNum - 1).css({
@@ -226,11 +242,7 @@ function make_guess(guess) {
 		$("#clue" + (guessNum - 1)).css({
 			color: "#ff2"
 		});
-		ans_html = '<a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a> is correct! &#x1F9E0";
-		ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
-		$("#answer").html(ans_html);
-		document.getElementById("sharedata").innerHTML += "&#x1F9E0";
-		game_over();
+		game_over(true);
 	} else {
 		//console.log(guessNum);
 		$("#clue" + (guessNum - 1)).css({
@@ -238,9 +250,9 @@ function make_guess(guess) {
 		});
 		if (guessNum > total) { //Looser
 			ans_html = 'The Article is <a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a>";
-			ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
+			ans_html += "<br><i>...better luck next time</i>";
 			$("#answer").html(ans_html);
-			game_over();
+			game_over(false);
 			return;
 		}
 		add_clue(guessNum, clues[guessNum]);
