@@ -65,6 +65,7 @@ var guessNum = 0;
 var total = 5;
 var title = "";
 var clues = "";
+var ans_html = "";
 var ready = false;
 var gameover = false;
 
@@ -85,16 +86,8 @@ function sToMidnight() {
 
 
 
-function game_over(win) {
+function game_over() {
 	gameover = true;
-	let ans_html = '<a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a>";
-	if (win) {
-		ans_html += " is correct! &#x1F9E0";
-		document.getElementById("sharedata").innerHTML += "&#x1F9E0";
-	}
-	let motivator = ["You're Insane!", "...are you Ken Jennigs?", "par", "Close one!", "Whew...", "You'd better read that article!"];
-	ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
-	$("#answer").html(ans_html);
 	togglePanel("end", "block");
 	sec = sToMidnight()
 	ls.set('seenAbout', true, { ttl: 99999 });
@@ -103,6 +96,8 @@ function game_over(win) {
 	//setCookie('shareData', $("#sharedata").html(), 1, true)
 	ls.set('guessNum', guessNum, { ttl: sec });
 	//setCookie('guessNum', guessNum, 1, true)
+	ls.set('clues', $("#cluewrap").html(), { ttl: sec });
+	ls.set('ans_html', $("#answer").html(), { ttl: sec });
 }
 
 function setCookie(cookieName, cookieValue, daysToExpire, atMidnight) {
@@ -176,6 +171,24 @@ function read_clue(clueNum) {
 }
 
 function start_game(data) {
+	let guesses = ls.get('guessNum');
+	//guesses = getCookieValue("guessNum")
+	if (guesses) {
+		guesses = parseInt(guesses);
+		if (guesses < 1) {
+			guesses = 1
+		}
+		guessNum = guesses;
+		$("#cluewrap").html(ls.get('clues'));
+		//show_all_clues(guesses);
+		let sharedata = ls.get('shareData');
+		//sharedata = getCookieValue('shareData');
+		//console.log(shareData)
+		$("#sharedata").html(sharedata);
+		$("#answer").html(ls.get('ans_html'));
+		game_over()
+		return
+	}
 	//the game index is the date
 	let d = new Date();
 	g_idx = d.getDate();
@@ -188,22 +201,6 @@ function start_game(data) {
 	document.getElementById("sharedata").innerHTML += emojis[guessNum];
 	ready = 1;
 	// setup game if you already played
-	guesses = ls.get('guessNum');
-	//guesses = getCookieValue("guessNum")
-	if (guesses) {
-		guesses = parseInt(guesses);
-		if (guesses < 1) {
-			guesses = 1
-		}
-		guessNum = guesses
-		show_all_clues(guesses);
-		sharedata = ls.get('shareData');
-		//sharedata = getCookieValue('shareData');
-		//console.log(shareData)
-		$("#sharedata").html(sharedata)
-		game_over(false)
-
-	}
 }
 
 function make_guess(guess) {
@@ -213,6 +210,7 @@ function make_guess(guess) {
 	}
 	guessNum += 1;
 	document.getElementById("sharedata").innerHTML += emojis[guessNum];
+	let motivator = ["You're Insane!", "...are you Ken Jennigs?", "...par", "...close one!", "Whew...", "...better luck next time"];
 	if (guess.toLowerCase() == title.toLowerCase()) {
 		// winnner
 		$("#clue" + guessNum - 1).css({
@@ -228,14 +226,21 @@ function make_guess(guess) {
 		$("#clue" + (guessNum - 1)).css({
 			color: "#ff2"
 		});
-		game_over(true);
+		ans_html = '<a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a> is correct! &#x1F9E0";
+		ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
+		$("#answer").html(ans_html);
+		document.getElementById("sharedata").innerHTML += "&#x1F9E0";
+		game_over();
 	} else {
 		//console.log(guessNum);
 		$("#clue" + (guessNum - 1)).css({
 			color: "#f22"
 		});
-		if (guessNum > total) {
-			game_over(false);
+		if (guessNum > total) { //Looser
+			ans_html = 'The Article is <a href="https://en.wikipedia.org/wiki/' + title + '" target="_blank">' + title + "</a>";
+			ans_html += "<br><i>" + motivator[guessNum - 1] + "</i>";
+			$("#answer").html(ans_html);
+			game_over();
 			return;
 		}
 		add_clue(guessNum, clues[guessNum]);
