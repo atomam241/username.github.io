@@ -163,7 +163,7 @@ function start_game(data) {
 	guessNum = 0;
 	total = 5;
 	title = data[g_idx]["answer"];
-	add_clue(0, display_clue0(clues[0]));
+	add_clue(0, clues[0]);
 	document.getElementById("sharedata").innerHTML += emojis[guessNum];
 	ready = 1;
 	// setup game if you already played
