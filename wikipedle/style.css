@@ -151,7 +151,7 @@ svg:hover {
 }
 
 #clue0 {
-  font-family: times, serif;
+  font-family: Georgia, serif;
   font-weight: bold;
   font-size: 24px;
   opacity: 0;
@@ -192,8 +192,7 @@ svg:hover {
   -webkit-transition-duration: 1s;
   transition-duration: 1s;
   color: #fff;
-  text-align: left;
-  font-family: sans-serif;
+  font-family: Georgia, serif;
 }
 
 #result {
