@@ -140,7 +140,7 @@ function share() {
 
 function load_game() {
 	var answer = "";
-	$.getJSON("https://raw.githubusercontent.com/odm7341/wikipedle/main/test.json", function (data) {
+	$.getJSON("https://raw.githubusercontent.com/odm7341/wikipedle/main/games.json", function (data) {
 		/*
 		clues = data[0]["clues"];
 		display_clue1(data[0]["clues"][0]);
