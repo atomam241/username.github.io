@@ -5,11 +5,11 @@ html, body {
   height: 100%;
 }
 body {
-  background: rgb(0,0,0);/*
-background: -moz-linear-gradient(0deg, rgba(99,64,122,1) 10%, rgba(198,103,103,1) 77%, rgba(201,127,21,1) 100%);
-background: -webkit-linear-gradient(0deg, rgba(99,64,122,1) 10%, rgba(198,103,103,1) 77%, rgba(201,127,21,1) 100%);
-background: linear-gradient(0deg, rgba(99,64,122,1) 10%, rgba(198,103,103,1) 77%, rgba(201,127,21,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#63407a",endColorstr="#c97f15",GradientType=1);                */
+  background: rgb(0,0,0);
+  background: -moz-linear-gradient(30deg, rgba(101,127,127,1) 10%, rgba(53,153,88,1) 67%, rgba(49,34,62,1) 100%);
+  background: -webkit-linear-gradient(30, rgba(101,127,127,1) 10%, rgba(,153,88,1) 67%, rgba(49,34,62,1) 100%);
+  background: linear-gradient(30deg, rgba(101,127,227,1) 10%, rgba(53,153,88,1) 67%, rgba(49,34,62,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#63407a",endColorstr="#c97f15",GradientType=1);                
   position: relative;
 }
 #starfield {

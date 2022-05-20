@@ -20,7 +20,7 @@ $(window).bind('resize', function(e) {
 });
 */
 var DENSITY = 5; // "per square inch" or something maybe
-makeStars(DENSITY);
+//makeStars(DENSITY);
 
 
 
@@ -33,7 +33,7 @@ function getCoords(event) {
 }
 
 
-requestAnimationFrame(drawStars);
+//requestAnimationFrame(drawStars);
 
 
 function makeStars(DENSITY) {
