@@ -97,7 +97,7 @@ function game_over(win) {
 	let totGuess = ls.get('totGuess') + guessNum
 	ls.set('totDays', totDays);
 	ls.set('totGuess', totGuess);
-	$("#sharedata").html('Guess Average: '+ (totGuess/totDays) +"<br>"+ $("#sharedata").html());
+	$("#sharedata").html('Guess Average: '+ (totGuess/totDays).toFixed(1) +"<br>"+ $("#sharedata").html());
 
 	$("#answer").html(ans_html);
 
