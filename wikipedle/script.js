@@ -97,7 +97,7 @@ function game_over(win) {
 	let totGuess = ls.get('totGuess') + guessNum
 	ls.set('totDays', totDays);
 	ls.set('totGuess', totGuess);
-	$("#sharedata").html('Guess Average: '+ (totGuess/totDays) +"<br>"+ $("#sharedata").html());
+	$("#sharedata").html('Guess Average: '+ (totGuess/totDays).toFixed(1) +"<br>"+ $("#sharedata").html());
 
 	$("#answer").html(ans_html);
 
@@ -140,7 +140,7 @@ function share() {
 
 function load_game() {
 	var answer = "";
-	$.getJSON("https://raw.githubusercontent.com/odm7341/wikipedle/main/test.json", function (data) {
+	$.getJSON("https://raw.githubusercontent.com/odm7341/wikipedle/main/games.json", function (data) {
 		/*
 		clues = data[0]["clues"];
 		display_clue1(data[0]["clues"][0]);

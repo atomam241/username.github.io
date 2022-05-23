@@ -3,23 +3,24 @@
 
 var canvas = document.getElementById("starfield");
 var context = canvas.getContext("2d");
-canvas.width = document.body.clientWidth;
-canvas.height = document.body.clientHeight;
+canvas.width = document.body.clientWidth*5;
+canvas.height = document.body.clientHeight*5;
 
 var stars = {};
 var adjustmentPoint = [0, 2];
 var overshoot = 500;
 var mousecoords = [];
 
+/*
 $(window).bind('resize', function(e) {
   if (window.RT) clearTimeout(window.RT);
   window.RT = setTimeout(function() {
-    this.location.reload(false); /* false to get page from cache */
+    this.location.reload(false);
   }, 100);
 });
-
+*/
 var DENSITY = 5; // "per square inch" or something maybe
-makeStars(DENSITY);
+//makeStars(DENSITY);
 
 
 
@@ -32,7 +33,7 @@ function getCoords(event) {
 }
 
 
-requestAnimationFrame(drawStars);
+//requestAnimationFrame(drawStars);
 
 
 function makeStars(DENSITY) {
@@ -42,11 +43,11 @@ function makeStars(DENSITY) {
   var randomX, randomY, randomZ;
   var sortable = [];
   for (var i = 0; i < totalStars; i++) {
-    randomX = Math.random() * (canvas.width - 1 + overshoot) + 1 - overshoot / 2;
-    randomY = Math.random() * (canvas.height - 1 + overshoot) + 1 - overshoot / 2;
+    randomX = Math.random() * (canvas.width*5);
+    randomY = Math.random() * (canvas.height*5);
     randomZ = Math.random() * 7;
     color = randColor();
-    stars[i] = [randomX, randomY, randomZ, color, randomX, randomY];
+    stars[i] = [randomX, randomY, randomZ, color];
     sortable.push(randomZ);
   }
   sortable.sort();
@@ -62,7 +63,12 @@ function drawStars() {
   //context.fillStyle = "rgba(255, 255, 255, 0.5)"
   for (var i in stars) {
     context.fillStyle = stars[i][3];
-    context.fillRect(stars[i][0], stars[i][1], stars[i][2], stars[i][2]);
+    //context.fillRect(stars[i][0], stars[i][1], stars[i][2], stars[i][2]);
+	context.shadowBlur = 20;
+	context.shadowColor = stars[i][3];;
+	context.beginPath();
+	context.arc(stars[i][0], stars[i][1], stars[i][2], 0, 2 * Math.PI);
+	context.fill();
     //context.fill();
   }
   updateStars();
@@ -72,8 +78,8 @@ function drawStars() {
 function updateStars() {
   for (var i in stars) {
 
-    stars[i][0] = stars[i][4] + adjustmentPoint[0] * (stars[i][2] * 2);
-    stars[i][1] = stars[i][5] + adjustmentPoint[1] * (stars[i][2] * 2);
+    //stars[i][0] = stars[i][4] + adjustmentPoint[0] * (stars[i][2] * 2);
+    //stars[i][1] = stars[i][5] + adjustmentPoint[1] * (stars[i][2] * 2);
 
     //stars[i][4] += adjustmentPoint[0] * stars[i][2] / 50;
     stars[i][5] += 2 * stars[i][2] / 50;
