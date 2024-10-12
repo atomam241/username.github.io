@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Mandelbrot Set</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: calc(100vh - 30px);
+        }
+        body {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Create the Web Worker
+        const worker = new Worker('mandelbrotWorker.js');
+
+        // Map to store tile elements associated with their worker results
+        const tileMap = {};
+
+        // Handle the message sent back from the worker with the Mandelbrot calculation result
+        worker.onmessage = function(e) {
+            const result = e.data.result; // This is the flat array of values from the worker
+            const tileId = e.data.tileId; // The unique ID to identify the tile
+            const tile = tileMap[tileId]; // Get the correct tile from the map
+
+            const ctx = tile.getContext('2d'); // Context of the tile
+            const imgData = ctx.createImageData(tile.width, tile.height); // Create image data for this tile
+
+            // Iterate through the result and convert Mandelbrot values into colors
+            for (let i = 0; i < result.length; i++) {
+                const value = result[i]; // Mandelbrot value between 0 and 1
+                const index = i * 4; // Position in the ImageData array (RGBA)
+
+                // Map the value to color (example: red based on value)
+                imgData.data[index] = 255 % ((.5 - value) * 255);    // Red
+                imgData.data[index + 1] = 255 % (.7 - value * 255);  // Green
+                imgData.data[index + 2] = 255 % ((1 - value) * 200);  // Blue
+                imgData.data[index + 3] = 255; // Alpha
+            }
+
+            // Put the computed ImageData on the canvas
+            ctx.putImageData(imgData, 0, 0);
+
+            // Clean up the map entry
+            // delete tileMap[tileId];
+        };
+
+        // Define the CanvasTileLayer that uses the Web Worker for Mandelbrot calculations
+        var CanvasTileLayer = L.GridLayer.extend({
+            createTile: function(coords) {
+                // Create the tile (canvas element)
+                const tile = document.createElement('canvas');
+                const size = this.getTileSize();
+                tile.width = size.x;
+                tile.height = size.y;
+
+                const tileId = `${coords.x}:${coords.y}:${coords.z}`; // Unique ID for each tile
+
+                if (tileMap[tileId]){
+                    console.log("hit");
+                    return tileMap[tileId];
+                }
+
+                // Store the tile in the map
+                tileMap[tileId] = tile;
+
+                // Calculate the bounds of the tile in the complex plane
+                const zoom = coords.z;
+                const scale = Math.pow(2, zoom);
+                const x0 = (coords.x / scale) * 3.5 - 2.5;
+                const y0 = (coords.y / scale) * 2 - 1;
+                const xScale = 3.5 / scale;
+                const yScale = 2 / scale;
+                const maxIterations = 100; // Maximum iterations for Mandelbrot calculation
+
+                // Send the data to the worker, including the tile ID
+                worker.postMessage({
+                    x0: x0,
+                    y0: y0,
+                    tileSize: size.x,
+                    xScale: xScale,
+                    yScale: yScale,
+                    maxIterations: maxIterations,
+                    tileId: tileId // Send the tile ID so we know which tile this result is for
+                });
+
+                return tile;
+            }
+        });
+
+        var map = L.map('map').setView([0, 0], 3);
+        var canvasTileLayer = new CanvasTileLayer();
+        canvasTileLayer.addTo(map);
+
+
+    </script>
+</body>
+</html>
