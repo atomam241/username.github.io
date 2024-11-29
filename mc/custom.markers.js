@@ -42,7 +42,7 @@ UnminedCustomMarkers = {
 
     markers: [
 
-/*         // Example 1: Simple marker
+        // Example 1: Simple marker
         {
             x: -200,
             z: -200,
@@ -74,19 +74,11 @@ UnminedCustomMarkers = {
             offsetX: 0,
             offsetY: 0, 
             font: "bold 50px Calibri,sans serif",
-        }, */
+        },
 
         // add your markers here
 
-        {
-            x: 1925,
-            z: -640,
-            text: "HOME", 
-            textColor: "red", 
-            offsetX: 0,
-            offsetY: 20,
-            font: "bold 20px Calibri,sans serif",
-        },
+
 
 
         // do not delete the following two closing brackets

@@ -4,11 +4,15 @@ var UnminedMapProperties = {
     maxZoom: 0,
     defaultZoom: 0,
     imageFormat: "jpeg",
-    minRegionX: -5,
-    minRegionZ: -7,
-    maxRegionX: 133,
-    maxRegionZ: 131,
+    minRegionX: -3,
+    minRegionZ: -4,
+    maxRegionX: 2,
+    maxRegionZ: 4,
     worldName: "world",
-    background: "#000000",
-    markers: new Array()
+    background: "#ff0000",
+    markers: new Array(),
+    enableGrid: true,
+    showGrid: true,
+    centerX: 0,
+    centerZ: 0
 }
